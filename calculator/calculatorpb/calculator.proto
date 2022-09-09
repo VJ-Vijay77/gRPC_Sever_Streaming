@@ -12,7 +12,16 @@ message SumResponse {
     int32 sum =1;
 }
 
+message PrimeNumberDecompositionRequest{
+    int64 number =1;
+}
+
+message PrimeNumberDecompositionResponse {
+    int64 prime_factor = 1;
+}
+
+
 service SumService {
     rpc Sum(SumRequest) returns (SumResponse) {};  
-
+    rpc PrimeNumberDecomposition(PrimeNumberDecompositionRequest) returns (stream PrimeNumberDecompositionResponse) {};
 }
