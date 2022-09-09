@@ -19,12 +19,27 @@ func main() {
 	defer cc.Close()
 	c := calculatorpb.NewSumServiceClient(cc)
 	// fmt.Printf("Created Client:%f",c)
-	doUnary(c)
+	// doUnary(c)
+	doServerStreaming(c)
 	
 }
 
 
 func doUnary(c calculatorpb.SumServiceClient) {
+	fmt.Println("Starting to do a Calculator Unary RPC...")
+	req := &calculatorpb.SumRequest{
+		FirstNumber: 45,
+		SecondNumber: 5,
+	}
+
+	res,err := c.Sum(context.Background(),req)
+	if err != nil {
+		log.Fatalf("error while calling SUM RPC : %v", err)
+	}
+	log.Printf("Response from SUM : %v",res.Sum)
+}
+
+func doServerStreaming(c calculatorpb.SumServiceClient) {
 	fmt.Println("Starting to do a Calculator Unary RPC...")
 	req := &calculatorpb.SumRequest{
 		FirstNumber: 45,
