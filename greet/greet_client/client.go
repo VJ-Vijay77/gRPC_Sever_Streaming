@@ -10,6 +10,7 @@ import (
 	"google.golang.org/grpc"
 )
 
+//main function
 
 func main() {
 	fmt.Println("Hello im a client!")
